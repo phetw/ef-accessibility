@@ -6,62 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EF Accessibility</title>
     <!-- Native element themes -->
-    <link rel="stylesheet" href="https://cdn.skypack.dev/@refinitiv-ui/halo-theme/dark/css/native-elements.css" />
+    <link rel="stylesheet" href="https://cdn.skypack.dev/@refinitiv-ui/halo-theme/light/css/native-elements.css" />
   </head>
   <body>
     <style>
       main {
         padding: 2em;
       }
+      [role='radiogroup'] {
+        display: flex;
+        flex-direction: column;
+      }
+      ef-radio-button {
+        margin-bottom: 12px;
+      }
     </style>
     <script type="module">
       // ELements
-      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/calendar?min';
+      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/radio-button?min';
       import 'https://cdn.skypack.dev/@refinitiv-ui/elements/combo-box?min';
+      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/calendar?min';
 
       // Locales
       import 'https://cdn.skypack.dev/@refinitiv-ui/phrasebook/locale/ja/calendar.js?min';
 
       // Themes
-      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/calendar/themes/halo/dark?min';
-      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/combo-box/themes/halo/dark?min';
+      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/radio-button/themes/halo/light?min';
+      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/combo-box/themes/halo/light?min';
+      import 'https://cdn.skypack.dev/@refinitiv-ui/elements/calendar/themes/halo/light?min';
     </script>
 
     <main>
       <h1>Element Framework Accessibility</h1>
-      <h2>Calendar</h2>
-      <section>
-        <h3>Default</h3>
-        <ef-calendar></ef-calendar>
-        <h3>Japanese</h3>
-        <ef-calendar lang="ja"></ef-calendar>
-      </section>
+      <h2>Radio button</h2>
+
+      <div role="radiogroup" aria-labelledby="radio-label">
+        <h6 id="radio-label">Please select your preferred contact method:</h6>
+        <ef-radio-button id="1" name="contact" value="email" checked>Email</ef-radio-button>
+        <ef-radio-button id="2" name="contact" value="phone">Phone</ef-radio-button>
+        <ef-radio-button id="3" name="contact" value="mail">Mail</ef-radio-button>
+      </div>
+
+      <hr />
 
       <h2>Combo-box</h2>
-      <section>
-        <p id="country-label">Choose a country:</p>
-        <ef-combo-box aria-labelledby="country-label"></ef-combo-box>
-        <script>
-          const comboBox = document.querySelector('ef-combo-box');
-          comboBox.data = [
-            { label: 'EMEA', type: 'header' },
-            { label: 'France', value: 'fr' },
-            { label: 'Russian Federation', value: 'ru' },
-            { label: 'Spain', value: 'es' },
-            { label: 'United Kingdom', value: 'gb', selected: true },
-            { label: 'APAC', type: 'header' },
-            { label: 'China', value: 'ch' },
-            { label: 'Australia', value: 'au' },
-            { label: 'India', value: 'in' },
-            { label: 'Thailand', value: 'th' },
-            { label: 'AMERS', type: 'header' },
-            { label: 'Canada', value: 'ca' },
-            { label: 'United States', value: 'us' },
-            { label: 'Brazil', value: 'br' },
-            { label: 'Argentina', value: 'ar' }
-          ];
-        </script>
-      </section>
+      <h6 id="country-label">Choose a country:</h6>
+      <ef-combo-box aria-labelledby="country-label"></ef-combo-box>
+      <script>
+        const comboBox = document.querySelector('ef-combo-box');
+        comboBox.data = [
+          { label: 'EMEA', type: 'header' },
+          { label: 'France', value: 'fr' },
+          { label: 'Russian Federation', value: 'ru' },
+          { label: 'Spain', value: 'es' },
+          { label: 'United Kingdom', value: 'gb', selected: true },
+          { label: 'APAC', type: 'header' },
+          { label: 'China', value: 'ch' },
+          { label: 'Australia', value: 'au' },
+          { label: 'India', value: 'in' },
+          { label: 'Thailand', value: 'th' },
+          { label: 'AMERS', type: 'header' },
+          { label: 'Canada', value: 'ca' },
+          { label: 'United States', value: 'us' },
+          { label: 'Brazil', value: 'br' },
+          { label: 'Argentina', value: 'ar' }
+        ];
+      </script>
+
+      <hr />
+
+      <h2>Calendar</h2>
+      <h3>Default</h3>
+      <ef-calendar></ef-calendar>
+      <h3>Japanese</h3>
+      <ef-calendar lang="ja"></ef-calendar>
     </main>
   </body>
 </html>
